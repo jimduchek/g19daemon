@@ -29,11 +29,13 @@ set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-std=c++11 -ggdb")
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Svg REQUIRED)
+
 
 find_package(libusb-1.0 REQUIRED)
 find_package(PulseAudio REQUIRED)
 
-include_directories(${Qt5Core_INCLUDE_DIRS} ${Qt5Gui_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS} ${LIBUSB_1_INCLUDE_DIRS})
+include_directories(${Qt5Core_INCLUDE_DIRS} ${Qt5Gui_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS} ${Qt5Svg_INCLUDE_DIRS} ${LIBUSB_1_INCLUDE_DIRS})
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -50,12 +52,13 @@ set(g19daemon_SRC
   src/g19daemon.cpp
   src/g19device.cpp
   src/gscreen.cpp
+  src/g19pluginsettings.cpp
 )
 
 qt5_add_resources(g19daemon_QRC src/g19daemon.qrc)
 
 add_executable(g19daemon ${g19daemon_SRC} ${g19daemon_QRC})
-target_link_libraries(g19daemon ${Qt5Core_LIBRARIES} ${Qt5Gui_LIBRARIES} ${Qt5Widgets_LIBRARIES} ${LIBUSB_1_LIBRARIES} ${PULSEAUDIO_LIBRARY} ${PULSEAUDIO_MAINLOOP_LIBRARY})
+target_link_libraries(g19daemon ${Qt5Core_LIBRARIES} ${Qt5Gui_LIBRARIES} ${Qt5Widgets_LIBRARIES} ${Qt5Svg_LIBRARIES} ${LIBUSB_1_LIBRARIES} ${PULSEAUDIO_LIBRARY} ${PULSEAUDIO_MAINLOOP_LIBRARY})
 
 qt5_use_modules(g19daemon Core Gui)
 
@@ -71,6 +74,7 @@ add_subdirectory(src/plugins/pavolume)
 add_subdirectory(src/plugins/mpris)
 add_subdirectory(src/plugins/clock)
 add_subdirectory(src/plugins/hardwaremonitor)
+add_subdirectory(src/plugins/pomodoro)
 
 set(QAPPLICATION_CLASS QApplication CACHE STRING "Inheritance class for SingleApplication")
 add_subdirectory(./src/singleapplication)
