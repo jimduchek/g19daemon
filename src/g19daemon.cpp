@@ -59,6 +59,9 @@ G19daemon::G19daemon(QWidget *parent)
     menuSettingsActive = false;
     unsavedSettings = false;
 
+    setAttribute(Qt::WA_DeleteOnClose, false);
+    setAttribute(Qt::WA_QuitOnClose, false);
+
     connect(device, SIGNAL(gKey()), SLOT(gKeys()));
     connect(device, SIGNAL(lKey()), SLOT(lKeys()));
 
