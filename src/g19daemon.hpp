@@ -71,6 +71,8 @@ public slots:
   void changeBackgroundColor();
 
   void saveSettings();
+  void savePluginSettings();
+
 
   void doAction(gAction, void *data);
 

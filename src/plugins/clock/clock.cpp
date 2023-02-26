@@ -38,13 +38,28 @@ Clock::Clock() {
   timer->start(1000);
 }
 
-Clock::~Clock() { delete screen; }
+Clock::~Clock() { 
+  delete screen; 
+}
 
 QString Clock::getName() { return tr("Clock"); }
 
 void Clock::lKeys(int keys) {}
 
 void Clock::mKeys(int keys) {}
+
+void Clock::setSettings(QSettings *s) {
+  settings = s;
+}
+
+QWidget *Clock::getSettingsPane() {
+  return new QWidget();
+}
+
+void Clock::saveSettingsPane() {
+
+}
+
 
 void Clock::setActive(bool active) {
   isActive = active;

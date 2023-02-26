@@ -193,6 +193,16 @@ void G19daemon::Show() {
     }
 }
 
+void G19daemon::savePluginSettings() {
+    for (int i = 0; i < plugins.size(); i++) {
+        plugins[i]->saveSettingsPane();
+    }
+
+    for (int i = 0; i < PopupPlugins.size(); i++) {
+        PopupPlugins[i]->saveSettingsPane();
+    }
+}
+
 void G19daemon::saveSettings() {
 
     qDebug() << "Save Settings";
@@ -513,6 +523,8 @@ void G19daemon::loadPlugins() {
                 QObject *signalsource = pluginint->getQObject();
                 connect(signalsource, SIGNAL(doAction(gAction, void * )), this,
                         SLOT(doAction(gAction, void * )));
+    
+                pluginint->setSettings(settings);
 
                 if (pluginint->isPopup()) {
                     PopupPlugins.append(pluginint);
@@ -750,6 +762,16 @@ void G19daemon::loadPluginsIntoMenubar() {
     QAction *configurePluginsAction = new QAction(tr("Configure Plugins"), ui->menuPlugins);
     connect(configurePluginsAction, &QAction::triggered, this, [=]() {
         G19PluginSettings *w = new G19PluginSettings(this);
+
+        for (int i = 0; i < plugins.size(); i++) {
+            w->addPlugin(plugins[i]);
+        }
+
+        for (int i = 0; i < PopupPlugins.size(); i++) {
+            w->addPlugin(PopupPlugins[i]);
+        }
+
+       
         w->show();
     });
     ui->menuPlugins->addSeparator();

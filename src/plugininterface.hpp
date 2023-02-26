@@ -24,6 +24,7 @@
 #include <QObject>
 #include <QString>
 #include <QtPlugin>
+#include <QSettings>
 
 enum gAction {
   displayFullScreen,
@@ -45,6 +46,9 @@ public:
   virtual bool isPopup() = 0;
   virtual QObject *getQObject() = 0;
   virtual void mKeys(int keys) = 0;
+  virtual void setSettings(QSettings *settings) = 0;
+  virtual QWidget *getSettingsPane() = 0;
+  virtual void saveSettingsPane() = 0;
 
 private:
 };

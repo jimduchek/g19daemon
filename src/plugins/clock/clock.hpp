@@ -22,6 +22,7 @@
 
 #include "../../gscreen.hpp"
 #include "../../plugininterface.hpp"
+
 #include <QtCore>
 #include <QtPlugin>
 
@@ -42,10 +43,15 @@ public:
   QObject *getQObject();
   void mKeys(int keys);
 
+  void setSettings(QSettings *settings);
+  QWidget *getSettingsPane();
+  void saveSettingsPane();
+
 private:
   Gscreen *screen;
   bool isActive;
   void paint();
+  QSettings *settings;
 
 signals:
   void doAction(gAction action, void *data); // Signal to draw img on screen

@@ -9,8 +9,8 @@ set(CPACK_RPM_PACKAGE_DESCRIPTION "G19daemon provides multiple virtual screens f
 include(CPack)
 
 set(VERSION_MAJOR 0 CACHE STRING "Major version" FORCE)
-set(VERSION_MINOR 1 CACHE STRING "Minor version" FORCE)
-set(VERSION_REVISION 2 CACHE STRING "Revison" FORCE)
+set(VERSION_MINOR 2 CACHE STRING "Minor version" FORCE)
+set(VERSION_REVISION 0 CACHE STRING "Revison" FORCE)
 
 set(PLUGINS_DIR lib/g19daemon/${VERSION_MAJOR}.${VERSION_MINOR}/plugins CACHE PATH "Path to installed plugins")
 set(THEMES_DIR lib/g19daemon/${VERSION_MAJOR}.${VERSION_MINOR}/themes CACHE PATH "Path to installed themes")
@@ -50,6 +50,7 @@ set(g19daemon_SRC
   src/g19daemon.cpp
   src/g19device.cpp
   src/gscreen.cpp
+  src/g19pluginsettings.cpp
 )
 
 qt5_add_resources(g19daemon_QRC src/g19daemon.qrc)
