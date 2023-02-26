@@ -18,6 +18,7 @@
  */
 
 #include "g19daemon.hpp"
+#include "g19pluginsettings.hpp"
 #include "config.h"
 #include "gscreen.hpp"
 #include "plugininterface.hpp"
@@ -742,4 +743,12 @@ void G19daemon::loadPluginsIntoMenubar() {
         ui->menuPlugins->addAction(action);
     }
 
+
+    QAction *configurePluginsAction = new QAction(tr("Configure Plugins"), ui->menuPlugins);
+    connect(configurePluginsAction, &QAction::triggered, this, [=]() {
+        G19PluginSettings *w = new G19PluginSettings(this);
+        w->show();
+    });
+    ui->menuPlugins->addSeparator();
+    ui->menuPlugins->addAction(configurePluginsAction);
 }
